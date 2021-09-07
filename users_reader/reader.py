@@ -9,9 +9,6 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://admin:admin@localhost/visualoffice'
 db = SQLAlchemy(app)
 
-if __name__ == '__main__':
-    app.run(host=config['READER_HOST'], port=config['READER_PORT'])
-
 @dataclass
 class Manager(db.Model):
 
@@ -116,3 +113,6 @@ def get_user(id):
     except:
         print("Ошибка чтения из БД")
     return jsonify(user)
+
+if __name__ == '__main__':
+    app.run(port=5001)
