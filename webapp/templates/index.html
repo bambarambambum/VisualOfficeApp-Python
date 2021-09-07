@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="display-4">Сотрудники офиса</h1>
+<br />
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Руководитель</th>
+            <th scope="col">ФИО</th>
+            <th scope="col">Должность</th>
+            <th scope="col">Возраст</th>
+            <th scope="col">Почта</th>
+            <th scope="col"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for manager in managers %}
+            <!-- Row -->
+            {% for user in manager.users %}
+                <tr>
+                    <th scope="row">
+                        <b>{{ user.id }}</b>
+                    </th>
+                    <td>
+                        {{ manager.name }}
+                    </td>
+                    <td>
+                        {{ user.name }}
+                    </td>
+                    <td>
+                        {{ user.position }}
+                    </td>
+                    <td>
+                        {{ user.age }}
+                    </td>
+                    <td>
+                        {{ user.email }}
+                    </td>
+                    <td style="width:15%" align="center">
+
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
