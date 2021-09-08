@@ -2,10 +2,13 @@ from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from dataclasses import dataclass
 import configparser
+# Тест, убрать
+from flask_cors import CORS
 
 config = configparser.ConfigParser()
 config.read("config")
 app = Flask(__name__)
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://admin:admin@localhost/visualoffice'
 db = SQLAlchemy(app)
 

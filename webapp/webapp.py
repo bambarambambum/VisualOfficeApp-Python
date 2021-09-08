@@ -9,11 +9,12 @@ BASE = "http://localhost:5001"
 @app.route('/')
 def main():
     managers = ''
+    url = BASE + "/api/users"
     try:
         managers = json.loads(requests.get(BASE + "/api/managers").text)
     except:
         print("Ошибка чтения из БД")
-    return render_template('index.html', title = "Главная", managers = managers)
+    return render_template('index.html', title = "Главная", managers = managers, url = url)
 
 @app.route('/edit/<int:id>')
 def edit(id):
