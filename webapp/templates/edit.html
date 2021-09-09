@@ -2,9 +2,9 @@
 {% block content %}
 <h1 class="display-4">Сотрудник офиса № {{ user.id }}</h1>
 <br />
-<form method="post" action="/Edit/{{user.id}}" class="needs-validation" novalidate>
-    <input type="hidden" value="{{ user.id }}" name="Id" />
-    <input type="hidden" value="{{ user.manager_id }}" name="RP.Email" />
+<form method="post" action="/edit/{{user.id}}" class="needs-validation" novalidate>
+    <input type="hidden" value="{{ user.id }}" name="id" />
+    <input type="hidden" value="{{ user.manager_id }}" name="manager_id" />
     <!-- Text boxes -->
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -16,30 +16,30 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">ФИО</span>
         </div>
-        <input type="text" name="Name" value="{{ user.name }}" class="form-control" required />
+        <input type="text" name="name" value="{{ user.name }}" class="form-control" required />
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Должность</span>
         </div>
-        <input type="text" name="Position" value="{{ user.position }}" class="form-control" required />
+        <input type="text" name="position" value="{{ user.position }}" class="form-control" required />
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Возраст</span>
         </div>
-        <input type="text" name="Age" value="{{ user.age }}" class="form-control" required />
+        <input type="text" name="age" value="{{ user.age }}" class="form-control" required />
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Почта</span>
         </div>
-        <input type="text" name="Email" value="{{ user.email }}" class="form-control" required />
+        <input type="text" name="email" value="{{ user.email }}" class="form-control" required />
     </div>
     <br />
     <!-- Save button -->
     <p><input type="submit" value="Сохранить" class="btn btn-dark btn-lg btn-block" /></p>
-    <!--<span class="badge badge-success">@ViewBag.Good</span>
-    <span class="badge badge-danger">@ViewBag.Bad</span>-->
+    <span class="badge badge-success">{{success}}</span>
+    <!--<span class="badge badge-danger">@ViewBag.Bad</span>-->
 </form>
 {% endblock %}
