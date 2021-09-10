@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from dataclasses import dataclass
 import configparser
@@ -52,12 +52,19 @@ class User(db.Model):
 
 @app.route('/api/users/<int:id>', methods=['POST'])
 def put_user(id):
-    user = ""
-    try:
+    data = request.values
+    if data != None:
         user = User.query.get(id)
+        user.manager_id = data['manager_id']
+        user.name = data['name']
+        user.position = data['position']
+        user.age = data['age']
+        user.email = data['email']
+    try:
+        db.session.commit()
     except:
         print("Ошибка чтения из БД")
-    return jsonify(user)
+    return "success"
 
 if __name__ == '__main__':
     app.run(port=5002)
