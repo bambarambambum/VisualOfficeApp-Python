@@ -7,11 +7,11 @@ from flask_cors import CORS
 from pathlib import Path
 
 script_path = Path(__file__).absolute().parent
+
 # Configuration
 file = f"{script_path}/config"
 config = ConfigParser()
 config.read(file)
-
 READER_PORT = config.get('app','reader_port')
 READER_HOST = config.get('app','reader_host')
 DATABASE_USER = config.get('database','database_user')
@@ -27,7 +27,6 @@ db = SQLAlchemy(app)
 
 @dataclass
 class Manager(db.Model):
-
     id: int
     name: str
     position: str
@@ -35,7 +34,6 @@ class Manager(db.Model):
     email: str
     n_subordinate: int
     users: object
-
     __tablename__ = 'managers'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
@@ -47,14 +45,12 @@ class Manager(db.Model):
 
 @dataclass
 class User(db.Model):
-
     id: int
     name: str
     position: str
     age: int
     email: str
     manager_id: int
-
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
@@ -131,4 +127,4 @@ def get_user(id):
     return jsonify(user)
 
 if __name__ == '__main__':
-    app.run(host=READER_HOST,port=READER_PORT)
+   app.run(host='0.0.0.0')

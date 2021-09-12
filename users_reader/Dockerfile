@@ -17,9 +17,9 @@ FROM python:3.8-alpine
 
 RUN apk add --no-cache postgresql-libs
 WORKDIR /reader
-COPY config reader.py ./
 
 COPY --from=compile /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
+COPY config reader.py ./
 CMD [ "python", "reader.py" ]
