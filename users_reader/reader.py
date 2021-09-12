@@ -12,8 +12,6 @@ script_path = Path(__file__).absolute().parent
 file = f"{script_path}/config"
 config = ConfigParser()
 config.read(file)
-READER_PORT = config.get('app','reader_port')
-READER_HOST = config.get('app','reader_host')
 DATABASE_USER = config.get('database','database_user')
 DATABASE_PASSWORD = config.get('database','database_password')
 DATABASE_DB = config.get('database','database_db')
@@ -22,7 +20,6 @@ DATABASE_HOST = config.get('database','database_host')
 app = Flask(__name__)
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_DB}'
-print(f'postgresql+psycopg2://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_DB}')
 db = SQLAlchemy(app)
 
 @dataclass
@@ -127,4 +124,4 @@ def get_user(id):
     return jsonify(user)
 
 if __name__ == '__main__':
-   app.run(host='0.0.0.0')
+   app.run(host='0.0.0.0', port=5000)
