@@ -31,13 +31,13 @@ def edit(id):
 def save(id):
     user = ''
     manager = ''
-    #try:
-    user = request.form.to_dict()
-    manager = json.loads(requests.get(BASE + "/api/managers/" + str(user["manager_id"])).text)
-    url = 'http://localhost:5000/api/users/' + user['id']
-    requests.post(url, data=user)
-    #except:
-    #print("Ошибка чтения из БД")
+    try:
+        user = request.form.to_dict()
+        manager = json.loads(requests.get(BASE + "/api/managers/" + str(user["manager_id"])).text)
+        url = 'http://localhost:5000/api/users/' + user['id']
+        requests.post(url, data=user)
+    except:
+        print("Ошибка чтения из БД")
     return render_template('edit.html', title = "Редактировать", user = user, manager = manager, success = "Данные успешно сохранены")
 
 if __name__ == '__main__':
