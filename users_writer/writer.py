@@ -4,10 +4,22 @@ from dataclasses import dataclass
 from configparser import ConfigParser
 # Тест, убрать
 from flask_cors import CORS
+from pathlib import Path
+
+script_path = Path(__file__).absolute().parent
+
+# Configuration
+file = f"{script_path}/config"
+config = ConfigParser()
+config.read(file)
+DATABASE_USER = config.get('database','database_user')
+DATABASE_PASSWORD = config.get('database','database_password')
+DATABASE_DB = config.get('database','database_db')
+DATABASE_HOST = config.get('database','database_host')
 
 app = Flask(__name__)
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://admin:admin@localhost/visualoffice'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_DB}'
 db = SQLAlchemy(app)
 
 @dataclass
@@ -61,7 +73,7 @@ def put_user(id):
     try:
         db.session.commit()
     except:
-        print("Ошибка чтения из БД")
+        print("Ошибка записи в БД")
     return "success"
 
 if __name__ == '__main__':
