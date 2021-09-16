@@ -1,0 +1,53 @@
+version: "3.8"
+
+services: 
+  reader:
+    container_name: vo_reader
+    image: androsovm/reader
+    environment: 
+      - DATABASE_HOST=postgres
+    ports:
+      - "8001:8001"
+    networks:
+      - backend
+  
+  writer:
+    container_name: vo_writer
+    image: androsovm/writer
+    environment: 
+      - DATABASE_HOST=postgres
+    ports:
+      - "8002:8002"
+    networks:
+      - backend
+
+  webapp:
+    container_name: vo_webapp
+    image: androsovm/webapp
+    environment:
+      - READER_HOST=vo_reader
+      - WRITER_HOST=vo_writer
+    ports:
+      - "8000:8000"
+    networks:
+      - backend
+      - frontend
+
+  postgres:
+    container_name: vo_pg
+    image: postgres
+    environment: 
+      - POSTGRES_DB=visualoffice
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    ports: 
+      - "5432:5432"
+    volumes: 
+      - $HOME/docker/volumes/postgres:/var/lib/postgresql/data
+    networks: 
+      - backend
+
+networks:
+  frontend:
+    external: true
+  backend:
