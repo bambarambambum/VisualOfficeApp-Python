@@ -3,10 +3,10 @@ properties([disableConcurrentBuilds()])
 
 pipeline{
     agent{
-        label "master"
+        label "main"
     }
     stages{
-        stage("create docker image"){
+        stage("create reader docker image"){
             steps{
                 echo "======== start building reader image ========"
                 dir ('/users_reader') {
