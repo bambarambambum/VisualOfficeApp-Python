@@ -1,0 +1,18 @@
+#!groovy
+properties([disableConcurrentBuilds()])
+
+pipeline{
+    agent{
+        label "master"
+    }
+    stages{
+        stage("create docker image"){
+            steps{
+                echo "======== start building reader image ========"
+                dir ('/users_reader') {
+                    sh 'docker image build -t reader .'
+                }
+            }
+        }
+    }
+}
