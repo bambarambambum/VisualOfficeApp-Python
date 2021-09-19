@@ -1,0 +1,5 @@
+[database]
+database_user = admin
+database_password = admin
+database_db = visualoffice
+database_host = 172.17.0.2
