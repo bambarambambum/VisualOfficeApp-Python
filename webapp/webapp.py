@@ -10,14 +10,15 @@ script_path = Path(__file__).absolute().parent
 file = f"{script_path}/config"
 config = ConfigParser()
 config.read(file)
-READER_HOST = config.get('users_reader','host')
-READER_PORT = config.get('users_reader','port')
-WRITER_HOST = config.get('users_writer','host')
-WRITER_PORT = config.get('users_writer','port')
+READER_HOST = config.get('users_reader', 'host')
+READER_PORT = config.get('users_reader', 'port')
+WRITER_HOST = config.get('users_writer', 'host')
+WRITER_PORT = config.get('users_writer', 'port')
 
 app = Flask(__name__)
 
 BASE = f"http://{READER_HOST}:{READER_PORT}"
+
 
 @app.route('/')
 def main():
@@ -27,7 +28,7 @@ def main():
         managers = json.loads(requests.get(BASE + "/api/managers").text)
     except:
         print("Ошибка чтения из БД")
-    return render_template('index.html', title = "Главная", managers = managers, url = url)
+    return render_template('index.html', title="Главная", managers=managers, url=url)
 
 @app.route('/edit/<int:id>', methods=['GET'])
 def edit(id):
@@ -40,6 +41,7 @@ def edit(id):
         print("Ошибка чтения из БД")
     return render_template('edit.html', title = "Редактировать", user = user, manager = manager)
 
+
 @app.route('/edit/<int:id>', methods=['PUT','POST'])
 def save(id):
     user = ''
@@ -51,7 +53,9 @@ def save(id):
         requests.post(url, data=user)
     except:
         print("Ошибка чтения из БД")
-    return render_template('edit.html', title = "Редактировать", user = user, manager = manager, success = "Данные успешно сохранены")
+    return render_template('edit.html', title="Редактировать", user=user, manager=manager, success="Данные успешно сохранены")
+
 
 if __name__ == '__main__':
     app.run(port=5002)
+    
