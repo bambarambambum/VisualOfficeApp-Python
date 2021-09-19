@@ -1,19 +1,24 @@
+from os import environ
 from flask import Flask, render_template, request
 import json
 import requests
-from configparser import ConfigParser
 from pathlib import Path
 
 script_path = Path(__file__).absolute().parent
 
 # Configuration
-file = f"{script_path}/config"
-config = ConfigParser()
-config.read(file)
-READER_HOST = config.get('users_reader', 'host')
-READER_PORT = config.get('users_reader', 'port')
-WRITER_HOST = config.get('users_writer', 'host')
-WRITER_PORT = config.get('users_writer', 'port')
+READER_HOST = environ.get('DATABASE_USER')
+if (READER_HOST is None):
+    READER_HOST = "localhost"
+READER_PORT = environ.get('DATABASE_PASSWORD')
+if (READER_PORT is None):
+    READER_PORT = "8001"
+WRITER_HOST = environ.get('DATABASE_DB')
+if (WRITER_HOST is None):
+    WRITER_HOST = "localhost"
+WRITER_PORT = environ.get('DATABASE_HOST')
+if (WRITER_PORT is None):
+    WRITER_PORT = "8002"
 
 app = Flask(__name__)
 
@@ -58,4 +63,4 @@ def save(id):
 
 
 if __name__ == '__main__':
-    app.run(port=5002)
+    app.run()

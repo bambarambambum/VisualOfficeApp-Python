@@ -1,7 +1,7 @@
+from os import environ
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from dataclasses import dataclass
-from configparser import ConfigParser
 # Тест, убрать
 from flask_cors import CORS
 from pathlib import Path
@@ -9,13 +9,18 @@ from pathlib import Path
 script_path = Path(__file__).absolute().parent
 
 # Configuration
-file = f"{script_path}/config"
-config = ConfigParser()
-config.read(file)
-DATABASE_USER = config.get('database', 'database_user')
-DATABASE_PASSWORD = config.get('database', 'database_password')
-DATABASE_DB = config.get('database', 'database_db')
-DATABASE_HOST = config.get('database', 'database_host')
+DATABASE_USER = environ.get('DATABASE_USER')
+if (DATABASE_USER is None):
+    DATABASE_USER = "admin"
+DATABASE_PASSWORD = environ.get('DATABASE_PASSWORD')
+if (DATABASE_PASSWORD is None):
+    DATABASE_PASSWORD = "admin"
+DATABASE_DB = environ.get('DATABASE_DB')
+if (DATABASE_DB is None):
+    DATABASE_DB = "visualoffice"
+DATABASE_HOST = environ.get('DATABASE_HOST')
+if (DATABASE_HOST is None):
+    DATABASE_HOST = "localhost"
 
 app = Flask(__name__)
 CORS(app)
@@ -81,4 +86,4 @@ def put_user(id):
 
 
 if __name__ == '__main__':
-    app.run(port=5002)
+    app.run()

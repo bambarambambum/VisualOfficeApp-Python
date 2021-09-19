@@ -58,9 +58,6 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }} 
 
-    - name: Copy config example to config
-      run: cp users_reader/config.example users_reader/config
-
     - name: Reader image Build and push
       uses: docker/build-push-action@v2
       id: docker_build_reader
@@ -69,9 +66,6 @@ jobs:
         push: true
         tags: ${{ env.DOCKER_HUB_USER }}/${{ env.READER_IMAGE_NAME }}:${{ env.READER_IMAGE_TAG }}
 
-    - name: Copy config example to config
-      run: cp users_writer/config.example users_writer/config
-
     - name: Writer image Build and push
       uses: docker/build-push-action@v2
       id: docker_build_writer
@@ -79,9 +73,6 @@ jobs:
         context: ./users_writer
         push: true
         tags: ${{ env.DOCKER_HUB_USER }}/${{ env.WRITER_IMAGE_NAME }}:${{ env.WRITER_IMAGE_TAG }}
-
-    - name: Copy config example to config
-      run: cp webapp/config.example webapp/config
 
     - name: WebApp image Build and push
       uses: docker/build-push-action@v2
