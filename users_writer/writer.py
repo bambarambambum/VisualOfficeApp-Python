@@ -79,6 +79,6 @@ def put_user(id):
         print("Ошибка записи в БД")
     return "success"
 
+
 if __name__ == '__main__':
     app.run(port=5002)
-    

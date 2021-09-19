@@ -30,6 +30,7 @@ def main():
         print("Ошибка чтения из БД")
     return render_template('index.html', title="Главная", managers=managers, url=url)
 
+
 @app.route('/edit/<int:id>', methods=['GET'])
 def edit(id):
     user = ''
@@ -39,10 +40,10 @@ def edit(id):
         manager = json.loads(requests.get(BASE + "/api/managers/" + str(user["manager_id"])).text)
     except:
         print("Ошибка чтения из БД")
-    return render_template('edit.html', title = "Редактировать", user = user, manager = manager)
+    return render_template('edit.html', title="Редактировать", user=user, manager=manager)
 
 
-@app.route('/edit/<int:id>', methods=['PUT','POST'])
+@app.route('/edit/<int:id>', methods=['PUT', 'POST'])
 def save(id):
     user = ''
     manager = ''
@@ -58,4 +59,3 @@ def save(id):
 
 if __name__ == '__main__':
     app.run(port=5002)
-    
