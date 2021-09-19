@@ -58,24 +58,24 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Reader image Build and push
-        id: docker_build_reader
         uses: docker/build-push-action@v2
+        id: docker_build_reader
         with:
           context: ./users_reader
           push: true
           tags: ${{ env.DOCKER_HUB_USER }}/${{ env.READER_IMAGE_NAME }}:${{ env.READER_IMAGE_TAG }}
 
       - name: Writer image Build and push
-        id: docker_build_writer
         uses: docker/build-push-action@v2
+        id: docker_build_writer
         with:
           context: ./users_writer
           push: true
           tags: ${{ env.DOCKER_HUB_USER }}/${{ env.WRITER_IMAGE_NAME }}:${{ env.WRITER_IMAGE_TAG }}
 
       - name: WebApp image Build and push
-        id: docker_build_webapp
         uses: docker/build-push-action@v2
+        id: docker_build_webapp
         with:
           context: ./webapp
           push: true
