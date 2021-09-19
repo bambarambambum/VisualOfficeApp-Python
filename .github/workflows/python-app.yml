@@ -59,7 +59,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }} 
 
     - name: Copy config example to config
-      run: cp /users_reader/config.example /users_reader/config
+      run: cp users_reader/config.example users_reader/config
 
     - name: Reader image Build and push
       uses: docker/build-push-action@v2
@@ -70,7 +70,7 @@ jobs:
         tags: ${{ env.DOCKER_HUB_USER }}/${{ env.READER_IMAGE_NAME }}:${{ env.READER_IMAGE_TAG }}
 
     - name: Copy config example to config
-      run: cp /users_writer/config.example /users_writer/config
+      run: cp users_writer/config.example users_writer/config
 
     - name: Writer image Build and push
       uses: docker/build-push-action@v2
