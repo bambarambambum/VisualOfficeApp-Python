@@ -7,16 +7,16 @@ from pathlib import Path
 script_path = Path(__file__).absolute().parent
 
 # Configuration
-READER_HOST = environ.get('DATABASE_USER')
+READER_HOST = environ.get('READER_HOST')
 if (READER_HOST is None):
     READER_HOST = "localhost"
-READER_PORT = environ.get('DATABASE_PASSWORD')
+READER_PORT = environ.get('READER_PORT')
 if (READER_PORT is None):
     READER_PORT = "8001"
-WRITER_HOST = environ.get('DATABASE_DB')
+WRITER_HOST = environ.get('WRITER_HOST')
 if (WRITER_HOST is None):
     WRITER_HOST = "localhost"
-WRITER_PORT = environ.get('DATABASE_HOST')
+WRITER_PORT = environ.get('WRITER_PORT')
 if (WRITER_PORT is None):
     WRITER_PORT = "8002"
 
