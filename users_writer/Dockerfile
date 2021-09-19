@@ -21,5 +21,5 @@ WORKDIR /writer
 COPY --from=compile /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY config writer.py ./
+COPY writer.py .
 CMD ["gunicorn", "-b", "0.0.0.0:8002", "writer:app"]

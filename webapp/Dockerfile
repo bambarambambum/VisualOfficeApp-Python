@@ -18,5 +18,5 @@ COPY --from=compile /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 COPY static ./static
 COPY templates ./templates
-COPY config webapp.py ./
+COPY webapp.py .
 CMD ["gunicorn", "-b", "0.0.0.0:8000", "webapp:app"]

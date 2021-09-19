@@ -21,5 +21,5 @@ WORKDIR /reader
 COPY --from=compile /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY config reader.py ./
+COPY reader.py .
 CMD ["gunicorn", "-b", "0.0.0.0:8001", "reader:app"]
