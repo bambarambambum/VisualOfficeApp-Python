@@ -1,0 +1,6 @@
+[users_reader]
+host = 127.0.0.1
+port = 8001
+[users_writer]
+host = 127.0.0.1
+port = 8002

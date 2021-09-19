@@ -65,7 +65,7 @@ jobs:
       uses: docker/build-push-action@v2
       id: docker_build_reader
       with:
-        context: users_reader
+        context: ./users_reader
         push: true
         tags: ${{ env.DOCKER_HUB_USER }}/${{ env.READER_IMAGE_NAME }}:${{ env.READER_IMAGE_TAG }}
 
@@ -79,6 +79,9 @@ jobs:
         context: ./users_writer
         push: true
         tags: ${{ env.DOCKER_HUB_USER }}/${{ env.WRITER_IMAGE_NAME }}:${{ env.WRITER_IMAGE_TAG }}
+
+    - name: Copy config example to config
+      run: cp webapp/config.example webapp/config
 
     - name: WebApp image Build and push
       uses: docker/build-push-action@v2
