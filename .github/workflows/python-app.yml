@@ -58,11 +58,16 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }} 
 
+    - name: Show files
+      run: | 
+        ls -l
+        ls -l /users_reader
+
     - name: Reader image Build and push
       uses: docker/build-push-action@v2
       id: docker_build_reader
       with:
-        context: ./users_reader
+        context: /users_reader
         push: true
         tags: ${{ env.DOCKER_HUB_USER }}/${{ env.READER_IMAGE_NAME }}:${{ env.READER_IMAGE_TAG }}
 
