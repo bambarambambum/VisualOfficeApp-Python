@@ -19,4 +19,5 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY static ./static
 COPY templates ./templates
 COPY webapp.py .
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "webapp:app"]
+#CMD ["gunicorn", "-b", "0.0.0.0:8000", "webapp:app"]
+CMD ["python3", "webapp.py"]
