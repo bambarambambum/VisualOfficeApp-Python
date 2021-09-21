@@ -23,6 +23,7 @@ if (WRITER_PORT is None):
 app = Flask(__name__)
 
 BASE = f"http://{READER_HOST}:{READER_PORT}"
+print(BASE)
 
 
 @app.route('/')
