@@ -2,9 +2,7 @@ from os import environ
 from flask import Flask, render_template, request
 import json
 import requests
-from pathlib import Path
-
-script_path = Path(__file__).absolute().parent
+from prometheus_flask_exporter import PrometheusMetrics
 
 # Configuration
 READER_HOST = environ.get('READER_HOST')
@@ -23,8 +21,7 @@ if (WRITER_PORT is None):
 app = Flask(__name__)
 
 BASE = f"http://{READER_HOST}:{READER_PORT}"
-print(BASE)
-
+metrics = PrometheusMetrics(app, group_by='endpoint')
 
 @app.route('/')
 def main():
