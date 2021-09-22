@@ -2,6 +2,7 @@ from os import environ
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from dataclasses import dataclass
+from prometheus_flask_exporter import PrometheusMetrics
 # Тест, убрать
 from flask_cors import CORS
 from pathlib import Path
@@ -24,6 +25,7 @@ if (DATABASE_HOST is None):
 
 app = Flask(__name__)
 CORS(app)
+metrics = PrometheusMetrics(app, group_by='endpoint')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_DB}'
 db = SQLAlchemy(app)
 
