@@ -1,7 +1,8 @@
 from os import environ
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from dataclasses import dataclass
+from prometheus_flask_exporter import PrometheusMetrics
 # Тест, убрать
 from flask_cors import CORS
 from pathlib import Path
@@ -24,6 +25,7 @@ if (DATABASE_HOST is None):
 
 app = Flask(__name__)
 CORS(app)
+metrics = PrometheusMetrics(app, group_by='endpoint')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_DB}'
 db = SQLAlchemy(app)
 
@@ -75,6 +77,11 @@ def managers():
 
 
 @app.route('/api/managers/<int:id>')
+@metrics.counter(
+    'invocation_by_manager', 'Number of invocations by manager', labels={
+        'collection': lambda: request.view_args['id'],
+        'status': lambda resp: resp.status_code
+    })
 def get_manager(id):
     manager = ""
     try:
@@ -95,6 +102,11 @@ def get_manager_users(id):
 
 
 @app.route('/api/managers/<int:id>/users/<int:user_id>')
+@metrics.counter(
+    'invocation_by_user', 'Number of invocations by user', labels={
+        'collection': lambda: request.view_args['user_id'],
+        'status': lambda resp: resp.status_code
+    })
 def get_manager_user(id, user_id):
     manager = ""
     user = ""
