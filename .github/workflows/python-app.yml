@@ -10,6 +10,8 @@ env:
   WRITER_IMAGE_TAG: latest
   WEBAPP_IMAGE_NAME: webapp
   WEBAPP_IMAGE_TAG: latest
+  FILL_DB_IMAGE_NAME: fill_db_script
+  FILL_DB_IMAGE_TAG: latest
 
 on:
   push:
@@ -74,10 +76,10 @@ jobs:
         push: true
         tags: ${{ env.DOCKER_HUB_USER }}/${{ env.WRITER_IMAGE_NAME }}:${{ env.WRITER_IMAGE_TAG }}
 
-    - name: WebApp image Build and push
+    - name: Fill db script image Build and push
       uses: docker/build-push-action@v2
       id: docker_build_webapp
       with:
-        context: ./webapp
+        context: ./db
         push: true
-        tags: ${{ env.DOCKER_HUB_USER }}/${{ env.WEBAPP_IMAGE_NAME }}:${{ env.WEBAPP_IMAGE_TAG }}
+        tags: ${{ env.DOCKER_HUB_USER }}/${{ env.FILL_DB_IMAGE_NAME }}:${{ env.FILL_DB_IMAGE_TAG }}
