@@ -19,4 +19,7 @@ WebApp обращается к микросервису users_reader (читат
 CI выполняется с помощью GitHub Actions. При пуше в ветку main происходит сборка и публикация docker-контейнеров.
 ## Запуск
 С помощью docker-compose
-
+```sh
+git clone https://github.com/bambarambambum/VisualOfficeApp-Python.git
+docker-compose up -d
+```
