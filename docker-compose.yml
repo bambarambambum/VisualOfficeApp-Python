@@ -47,6 +47,16 @@ services:
     networks: 
       - backend
 
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - /home/uadmin/default.conf:/etc/nginx/conf.d/default.conf
+    networks: 
+      - backend
+
 networks:
   frontend:
     external: true
