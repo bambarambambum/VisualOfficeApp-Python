@@ -75,10 +75,18 @@ jobs:
         context: ./users_writer
         push: true
         tags: ${{ env.DOCKER_HUB_USER }}/${{ env.WRITER_IMAGE_NAME }}:${{ env.WRITER_IMAGE_TAG }}
+        
+    - name: Webapp image Build and push
+      uses: docker/build-push-action@v2
+      id: docker_build_webapp
+      with:
+        context: ./webapp
+        push: true
+        tags: ${{ env.DOCKER_HUB_USER }}/${{ env.WEBAPP_IMAGE_NAME }}:${{ env.WEBAPP_IMAGE_TAG }}
 
     - name: Fill db script image Build and push
       uses: docker/build-push-action@v2
-      id: docker_build_webapp
+      id: docker_build_filldb
       with:
         context: ./db
         push: true
