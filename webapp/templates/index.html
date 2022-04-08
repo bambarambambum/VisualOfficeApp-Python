@@ -22,7 +22,7 @@
             var mpos = object.getBoundingClientRect();
             // Get users
             $.ajax({
-                url: $(location).attr('hostname'),
+                url: $(location).attr('origin') + "/api/users",
                 async: false,
                 dataType: 'json',
                 success: function (json) {
