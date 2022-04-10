@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  selector:
+    matchLabels:
+      app: webapp-webapp
+  template:
+    metadata:
+      labels:
+        app: webapp-webapp
+        project: vo
+    spec:
+      containers:
+      - name: vo-webapp
+        image: androsovm/webapp:latest
+        envFrom:
+          - configMapRef:
+              name: vo-configmap
+      resources:

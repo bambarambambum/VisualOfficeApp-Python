@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reader-deployment
+spec:
+  selector:
+    matchLabels:
+      app: webapp-reader
+  template:
+    metadata:
+      labels:
+        app: webapp-reader
+    spec:
+      containers:
+      - name: vo-reader
+        image: androsovm/reader:latest
+        env:
+          - name: DATABASE_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: vo-configmap
+                key: DATABASE_HOST
+      resources:

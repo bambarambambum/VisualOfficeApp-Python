@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-writer-service # Просто ключ=значение
+spec:
+  selector:
+    app: webapp-writer # Сервис будет применятся только к подам с этой меткой
+    project: vo
+  ports:
+  - protocol: TCP
+    port: 8002
+    targetPort: 8002

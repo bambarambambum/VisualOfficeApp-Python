@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: filldb-pod
+  labels:
+    app: webapp
+    project: vo
+spec:
+  containers:
+  - name: filldb
+    image: androsovm/fill_db_script:latest
+    env:
+      - name: DATABASE_HOST
+        valueFrom:
+          configMapKeyRef:
+            name: vo-configmap
+            key: DATABASE_HOST
+  restartPolicy: Never
+  resources:

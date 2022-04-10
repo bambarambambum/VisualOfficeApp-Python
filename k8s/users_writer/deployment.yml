@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: writer-deployment # Просто ключ=значение
+spec:
+  selector:
+    matchLabels: # Деплоймент будет управлять подами только с этой меткой
+      app: webapp-writer
+  template: # Поды с указанной меткой
+    metadata:
+      labels:
+        app: webapp-writer
+    spec:
+      containers:
+      - name: vo-writer
+        image: androsovm/writer:latest
+        env:
+          - name: DATABASE_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: vo-configmap
+                key: DATABASE_HOST
+      resources:

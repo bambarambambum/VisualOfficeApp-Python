@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vo-configmap
+data:
+  DATABASE_HOST: webapp-pg-service
+  READER_HOST: webapp-reader-service
+  WRITER_HOST: webapp-writer-service

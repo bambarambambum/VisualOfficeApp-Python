@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  selector:
+    matchLabels:
+      app: webapp-pg
+  template:
+    metadata:
+      labels:
+        app: webapp-pg
+    spec:
+      containers:
+      - name: vo-postgres
+        image: postgres:latest
+        envFrom:
+          - secretRef:
+              name: webapp-secrets
+        ports:
+          - containerPort: 5432
+      resources:
